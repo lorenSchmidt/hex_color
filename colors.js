@@ -3,7 +3,11 @@
 colors
 ---------------------------------------------------------------------------------
 */
+// convenience functions for handling color in js
 
+function rgb(r, g, b) {
+	return { r:r, g:g, b:b }
+}
 
 function rgb_from_hex(hex) {
 	let r = parseInt(hex[1] + hex[2], 16)
@@ -21,10 +25,18 @@ function blend_rgb(a, b, t) {
 }
 
 
+function hex(r, g, b) {
+	let rh = r.toString(16).padStart(2, "0")
+	let gh = g.toString(16).padStart(2, "0")
+	let bh = b.toString(16).padStart(2, "0")
+	let string = "#" + r + g + b
+}
+
+
 function hex_from_rgb(color) {
-	let r = color.r.toString(16).padStart(2, "0")
-	let g = color.g.toString(16).padStart(2, "0")
-	let b = color.b.toString(16).padStart(2, "0")
+	let rh = color.r.toString(16).padStart(2, "0")
+	let gh = color.g.toString(16).padStart(2, "0")
+	let bh = color.b.toString(16).padStart(2, "0")
 	let string = "#" + r + g + b
 	return string
 }
