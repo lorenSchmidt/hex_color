@@ -17,7 +17,7 @@ function hex(r, g, b) {
 	let rh = r.toString(16).padStart(2, "0")
 	let gh = g.toString(16).padStart(2, "0")
 	let bh = b.toString(16).padStart(2, "0")
-	let string = "#" + r + g + b
+	let string = "#" + rh + gh + bh
 }
 
 
