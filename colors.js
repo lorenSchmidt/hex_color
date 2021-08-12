@@ -2,29 +2,17 @@
 ---------------------------------------------------------------------------------
 colors
 ---------------------------------------------------------------------------------
+convenience functions for handling color in js
 */
-// convenience functions for handling color in js
 
+
+// makes an rgb color {r, g, b}
 function rgb(r, g, b) {
 	return { r:r, g:g, b:b }
 }
 
-function rgb_from_hex(hex) {
-	let r = parseInt(hex[1] + hex[2], 16)
-	let g = parseInt(hex[3] + hex[4], 16)
-	let b = parseInt(hex[5] + hex[6], 16)
-	return { r:r, g:g, b:b }
-}
 
-
-// linear blend between two colors {r, g, b} (0-255). t is blend value 0-1.
-function blend_rgb(a, b, t) {
-	return { r: Math.floor((1 - t) * a.r + t * b.r),
-			 g: Math.floor((1 - t) * a.g + t * b.g),
-			 b: Math.floor((1 - t) * a.b + t * b.b) }
-}
-
-
+// makes a js friendly hex color string "#rrggbb"
 function hex(r, g, b) {
 	let rh = r.toString(16).padStart(2, "0")
 	let gh = g.toString(16).padStart(2, "0")
@@ -33,12 +21,30 @@ function hex(r, g, b) {
 }
 
 
+// convert to rgb from hex
+function rgb_from_hex(hex) {
+	let r = parseInt(hex[1] + hex[2], 16)
+	let g = parseInt(hex[3] + hex[4], 16)
+	let b = parseInt(hex[5] + hex[6], 16)
+	return { r:r, g:g, b:b }
+}
+
+
+// convert to hex from rgb
 function hex_from_rgb(color) {
 	let rh = color.r.toString(16).padStart(2, "0")
 	let gh = color.g.toString(16).padStart(2, "0")
 	let bh = color.b.toString(16).padStart(2, "0")
-	let string = "#" + r + g + b
+	let string = "#" + rh + gh + bh
 	return string
+}
+
+
+// linear blend between two colors {r, g, b} (0-255). t is blend value 0-1.
+function blend_rgb(a, b, t) {
+	return { r: Math.floor((1 - t) * a.r + t * b.r),
+			 g: Math.floor((1 - t) * a.g + t * b.g),
+			 b: Math.floor((1 - t) * a.b + t * b.b) }
 }
 
 
@@ -51,7 +57,6 @@ function test_blend(a, b) {
 		console.log("r: " + color.r + "g: " + color.g + "b: " + color.b + " (t = " + t + ")")
 	}
 }
-
 
 
 // for blending between two colors. this precomputes render-ready hex colors, precomputed to avoid run-time cost. a and b are colors {r, g, b}. table size is the number of steps, noninclusive, to get from a to b. note that if you input 4, you will actually get a table with 5 values, because that way it takes 4 steps to get from 1 to 0, or 0 to 1
